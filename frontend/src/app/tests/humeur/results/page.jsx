@@ -1,28 +1,17 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
-const resultRepliques = [
-    {
-      etat: "1",
-      replique: "Votre évaluation indique que vous avez un bon état émotionnel. Continuez à prendre soin de vous et à pratiquer des activités qui vous apportent joie et satisfaction. Restez attentif à votre bien-être et n'hésitez pas à consulter nos ressources pour maintenir cet équilibre."
-    },
-    {
-      etat: "2",
-      replique: "Votre évaluation suggère que vous traversez peut-être une période d'incertitude émotionnelle. Il est important de prêter attention à vos sentiments et de prendre soin de vous. Considérez parler à un professionnel ou à un proche de confiance, et explorez nos conseils pour gérer les moments de stress ou de tristesse."
-    },
-    {
-      etat: "3",
-      replique: "Votre évaluation indique un niveau élevé de détresse émotionnelle. Il est essentiel de ne pas ignorer ces sentiments. Nous vous recommandons fortement de consulter un professionnel de la santé pour obtenir un soutien adapté. En attendant, prenez le temps de parcourir nos ressources pour trouver des moyens de vous apaiser et de vous sentir mieux."
-    }
-  ];
   
 export default function Results() {
+    const router = useRouter();
     const searchParams = useSearchParams();
     const totalScore = searchParams.get('totalScore');
     const [Score, setScore] = useState(0);
     const [currentDate, setCurrentDate] = useState('');
     const [interpretation, setInterpretation] = useState("");
+
+    
 
     useEffect(() => {
         if ( Score < 8 ){
@@ -46,15 +35,18 @@ export default function Results() {
 
   return (
     <div className='font-serif  pt-12 px-6'>
-    <h1 className="font-serif text-center text-3xl font-bold my-8 ">Vos résultats </h1>
-    <div>
-        <p><strong>Identifiant:</strong> 01</p>
-        <p><strong>Nom et Prénom:</strong> nom prenom</p>
-        <p><strong>Date du test:</strong> {currentDate} </p>
-        <p><strong>Score:</strong> {Score} </p>
-        <p><strong>Interprétation:</strong> {interpretation} </p>
+        <h1 className="font-serif text-center text-3xl font-bold my-8 ">Vos résultats </h1>
+        <div className="mx-4">
+            <p className="my-2" ><strong>Identifiant:</strong> 01</p>
+            <p className="my-2"><strong>Nom et Prénom:</strong> nom prenom</p>
+            <p className="my-2"><strong>Date du test:</strong> {currentDate} </p>
+            <p className="my-2"><strong>Score:</strong> {Score} </p>
+            <p className="my-2"><strong>Interprétation:</strong> {interpretation} </p>
 
-    </div>
+        </div>
+        <div className="flex items-center justify-center">
+            <button onClick={() => router.push("/tests")} className=" shadow-md hover:shadow-xl bg-blue-500 hover:bg-sky-600 px-5 mx-5 my-8 h-9 w-80  rounded-3xl text-white"> Revenir aux tests psychologiques </button>
+        </div>
     </div>
 
   )

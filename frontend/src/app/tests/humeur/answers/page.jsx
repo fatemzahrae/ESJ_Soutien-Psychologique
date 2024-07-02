@@ -9,7 +9,6 @@ export default function Answers() {
     const answers = searchParams.get('answers');
     const answersArray = JSON.parse(answers)
     const [finalScore, setFinalScore] = useState(0);
-    console.log(finalScore)
 
     useEffect(() => {
         calculateScore(answersArray)
@@ -34,13 +33,13 @@ export default function Answers() {
     
       <div className='flex justify-center'>
       <Link href={{
-          pathname:"/tests/${title}/results",
+          pathname:"/tests/humeur/results",
           query:{
             totalScore: finalScore.toString()  },
           }} >
 
           <p className="block  shadow-md hover:shadow-xl bg-blue-500 hover:bg-sky-600 text-white text-center p-2 rounded-3xl my-2 w-[200px] h-[35px]">
-            Vos résultats
+           Résultats du test 
           </p>
 
         </Link>

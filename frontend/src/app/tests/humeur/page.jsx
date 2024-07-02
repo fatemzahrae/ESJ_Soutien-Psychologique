@@ -6,18 +6,12 @@ import Questions from '@/components/questions';
 import DebutTest from "@/components/debutTest";
 import TestComplet from "@/components/test-complet";
 
-const titles = [
-  { title: "Renforcement de l'estime de soi", key: "estime", desc:"Découvrez comment renforcer votre confiance en vous-même en explorant vos forces et en développant une image positive de vous-même." },
-  { title: "Evaluation de la Paix Intérieure", key: "paix", desc:"Plongez dans votre tranquillité intérieure pour comprendre et maîtriser votre niveau d'anxiété." },
-  { title: "Evaluation de l'Humeur et de la Vitalité", key: "humeur", desc:"Explorez votre humeur et découvrez des moyens de retrouver votre vitalité émotionnelle pour une vie plus équilibrée." },
-  { title: "Évaluation de la Qualité du Sommeil", key: "sommeil", desc:"Évaluez votre sommeil pour mieux comprendre ses impacts sur votre bien-être quotidien et trouver des solutions pour améliorer votre repos." }
-];
 
-export default function TestPage({params}) {
+export default function TestPage() {
   const router = useRouter();
-  const title = params.title;
-  const testTitle = (titles.find(test => test.key === title)).title;
-  const testDesc = (titles.find(test => test.key === title)).desc;
+  const title = "humeur";
+  const testTitle = "Evaluation de l'Humeur et de la Vitalité";
+  const testDesc = "Explorez votre humeur et découvrez des moyens de retrouver votre vitalité émotionnelle pour une vie plus équilibrée.";
   const questions = tests[title];
   const [stage, setStage] = useState('start');
   const [userAnswers, setUserAnswers] = useState([]);
