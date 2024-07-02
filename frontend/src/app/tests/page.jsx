@@ -2,7 +2,13 @@
 import { useRouter } from 'next/navigation';
 import { Suspense } from 'react';
 
-const tests = [ "Estime de soi", "Anxiété", "Dépression", "Apnée obstructive du sommeil"]
+const tests = [
+    { title: "Renforcement de l'estime de soi", key: "estime" },
+    { title: "Evaluation de la Paix Intérieure", key: "paix" },
+    { title: "Evaluation de l'Humeur et de la Vitalité", key: "humeur" },
+    { title: "Évaluation de la Qualité du Sommeil", key: "sommeil" }
+  ];
+  
 
 export default function Tests() {
   const router = useRouter();
@@ -25,13 +31,13 @@ export default function Tests() {
       <p>Choisissez un test ci-dessous pour commencer votre évaluation.</p>
       <Suspense fallback="Loading...">
         <div className="flex flex-col items-center justify-center mt-5">
-          {tests.map((test, index) => (
+          {tests.map((test) => (
             <button
-              key={index}
-              onClick={() => handleButtonClick(`/tests/${test}`)}
-              className="shadow-md bg-blue-500 hover:bg-sky-600 px-5 mx-5 my-2 w-1/3 h-9 rounded-2xl text-white"
+              key={test.key}
+              onClick={() => handleButtonClick(`/tests/${test.key}`)}
+              className="shadow-md hover:shadow-xl bg-blue-500 hover:bg-sky-600 px-5 mx-5 my-2 h-12 w-80  rounded-3xl text-white"
             >
-              {test}
+              {test.title}
             </button>
           ))}
         </div>
