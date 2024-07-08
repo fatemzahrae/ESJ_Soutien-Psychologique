@@ -18,6 +18,9 @@ const nextConfig = {
             }, {
                 protocol: "https",
                 hostname:"blog.reseau-morphee.fr",
+            }, {
+                protocol: "https",
+                hostname:"cdn-icons-png.freepik.com",
             },
 
         ]
@@ -27,4 +30,3 @@ const nextConfig = {
 export default nextConfig;
 
 
-  

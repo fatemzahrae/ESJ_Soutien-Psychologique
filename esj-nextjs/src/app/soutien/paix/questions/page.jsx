@@ -4,17 +4,23 @@ import React, { useState } from 'react';
 import Header from '../../../../components/Header';
 import Link from 'next/link';
 import questions from './AnxieteTest';
+import { useRouter } from 'next/navigation';
 
 
 export default function Questions() {
+  const router = useRouter();
   const [stage, setStage] = useState('questions');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [finalScore, setFinalScore] = useState(0);
  
 
-  const backFunction = (Index) => {
-    setCurrentQuestionIndex(Index-1)
-  }
+  const backFunction = (index) => {
+    if (index === 0) {
+      router.push('/soutien/paix');
+    } else {
+      setCurrentQuestionIndex(index - 1);
+    }
+  };
 
   const handleAnswer = (answerIndex) => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -73,22 +79,21 @@ export default function Questions() {
 
                   {stage === 'questions' && (
 
-                   <> {(currentQuestionIndex !== 0) && (
-                    <div className="col-sm-12">
-                      <ul className="breadcrumb">
-                        <li>
-                        <i className="feather-chevron-left">
-                        </i>
-                        </li>
-                        <li className="breadcrumb-item">
-                          <Link className="text-decoration-none" href="#" onClick={(e) => { e.preventDefault(); backFunction(currentQuestionIndex); }}>
-                            <span className="cursor-pointer text-decoration-none">Précédent</span>
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-
+                   <>                     
+                   <div className="col-sm-12">
+                   <ul className="breadcrumb">
+                     <li>
+                     <i className="feather-chevron-left">
+                     </i>
+                     </li>
+                     <li className="breadcrumb-item">
+                       <Link className="text-decoration-none" href="#" onClick={(e) => { e.preventDefault(); backFunction(currentQuestionIndex); }}>
+                         <span className="cursor-pointer text-decoration-none">Précédent</span>
+                       </Link>
+                     </li>
+                     <li className="ms-auto">{currentQuestionIndex + 1 } / {questions.length} </li>
+                   </ul>
+                 </div>
                 
 
                     <div className="mb-4 d-flex flex-column align-items-center  ">

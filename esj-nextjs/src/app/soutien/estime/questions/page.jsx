@@ -1,19 +1,26 @@
 "use client"
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Header from '../../../../components/Header';
 import Link from 'next/link';
 import questions from "./Estime"
+import { useRouter } from 'next/navigation';
 
 export default function Questions() {
+  const router = useRouter();
   const [stage, setStage] = useState('questions');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [finalScore, setFinalScore] = useState(0);
  
 
-  const backFunction = (Index) => {
-    setCurrentQuestionIndex(Index-1)
-  }
+  const backFunction = (index) => {
+    if (index === 0) {
+      router.push('/soutien/estime');
+    } else {
+      setCurrentQuestionIndex(index - 1);
+    }
+  };
+  
 
   const handleAnswer = (answerIndex) => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -69,10 +76,8 @@ export default function Questions() {
                 <article className="blog blog-single-post">
 
     {/**questions */}
-
-                  {stage === 'questions' && (
-
-                   <> {(currentQuestionIndex !== 0) && (
+               {stage === 'questions' && (
+                <>
                     <div className="col-sm-12">
                       <ul className="breadcrumb">
                         <li>
@@ -84,11 +89,11 @@ export default function Questions() {
                             <span className="cursor-pointer text-decoration-none">Précédent</span>
                           </Link>
                         </li>
+                        <li className="ms-auto">{currentQuestionIndex + 1 } / {questions.length} </li>
                       </ul>
                     </div>
-                  )}
 
-                
+
 
                     <div className="mb-4 d-flex flex-column align-items-center  ">
                     
@@ -106,14 +111,15 @@ export default function Questions() {
                         </div>
                       ))}
                     </div>
-               </>   )}
+               </>
+             )}
 
      {/**test completed */}
 
                   {stage === 'completed' && (
                    
                    <div className="container mx-auto p-4 d-flex flex-column align-items-center">
-                    <h3 className="font-light  my-8">Merci d avoir complété le test !</h3>
+                    <h3 className="font-light  my-8">Merci d'avoir complété le test !</h3>
                     <img
                         src="https://cdn-icons-png.freepik.com/512/6559/6559073.png"
                         alt="Logo"
